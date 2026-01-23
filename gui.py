@@ -12,12 +12,13 @@ SUCCESS = "#27ae60"
 R3_COLOR = "#f1c40f"   
 R4_COLOR = "#e67e22"   
 
+
 class MUPuzzleGUI:
     def __init__(self, root: tk.Tk):
         self.root = root
         self.root.title("MU Puzzle")
         self.root.configure(bg=BG)
-        self.root.geometry("760x520")
+        self.root.geometry("780x560")
 
         self.current = "MI"
         self.history = [self.current]
@@ -47,14 +48,22 @@ class MUPuzzleGUI:
 
         tk.Label(
             root,
-            text="Click highlighted parts of the string to apply rules",
+            text="Click highlighted parts of the string OR use rule buttons",
             bg=BG,
             fg=PRIMARY,
             font=("Helvetica", 10, "italic")
-        ).pack()
+        ).pack(pady=5)
+
+        rules = tk.Frame(root, bg=BG)
+        rules.pack(pady=10)
+
+        self.make_button(rules, "Rule 1 (I → IU)", self.apply_rule1).grid(row=0, column=0, padx=5)
+        self.make_button(rules, "Rule 2 (Mx → Mxx)", self.apply_rule2).grid(row=0, column=1, padx=5)
+        self.make_button(rules, "Rule 3 (III → U)", self.apply_rule3).grid(row=0, column=2, padx=5)
+        self.make_button(rules, "Rule 4 (UU → ε)", self.apply_rule4).grid(row=0, column=3, padx=5)
 
         buttons = tk.Frame(root, bg=BG)
-        buttons.pack(pady=15)
+        buttons.pack(pady=10)
 
         self.make_button(buttons, "Undo", self.undo).grid(row=0, column=0, padx=6)
         self.make_button(buttons, "Check Solvability", self.check_solvability).grid(row=0, column=1, padx=6)
@@ -66,14 +75,12 @@ class MUPuzzleGUI:
             w.destroy()
 
         s = self.current
-        n = len(s)
 
         for i, ch in enumerate(s):
             bg = CARD
 
             if s[i:i+3] == "III":
                 bg = R3_COLOR
-
             elif s[i:i+2] == "UU":
                 bg = R4_COLOR
 
@@ -83,7 +90,8 @@ class MUPuzzleGUI:
                 font=("Courier New", 30, "bold"),
                 bg=bg,
                 fg=PRIMARY,
-                padx=2
+                padx=2,
+                cursor="hand2"
             )
             lbl.pack(side="left")
             lbl.bind("<Button-1>", lambda e, idx=i: self.on_char_click(idx))
@@ -125,6 +133,34 @@ class MUPuzzleGUI:
             self.apply_move("M" + x + x)
             return
 
+    def apply_rule1(self):
+        if self.current.endswith("I"):
+            self.apply_move(self.current + "U")
+        else:
+            messagebox.showinfo("Rule 1", "Rule 1 applies only if the string ends in I.")
+
+    def apply_rule2(self):
+        if self.current.startswith("M"):
+            x = self.current[1:]
+            self.apply_move("M" + x + x)
+        else:
+            messagebox.showinfo("Rule 2", "Rule 2 applies only to strings starting with M.")
+
+    def apply_rule3(self):
+        idx = self.current.find("III")
+        if idx != -1:
+            self.apply_move(self.current[:idx] + "U" + self.current[idx+3:])
+        else:
+            messagebox.showinfo("Rule 3", "No occurrence of III found.")
+
+    def apply_rule4(self):
+        idx = self.current.find("UU")
+        if idx != -1:
+            self.apply_move(self.current[:idx] + self.current[idx+2:])
+        else:
+            messagebox.showinfo("Rule 4", "No occurrence of UU found.")
+
+
     def apply_move(self, new_s: str):
         self.history.append(self.current)
         self.current = new_s
@@ -151,6 +187,7 @@ class MUPuzzleGUI:
                 "This state MAY lead to MU.\n"
                 "(I mod 3 = 0)"
             )
+
 
     def make_button(self, parent, text, command):
         return tk.Button(
