@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from move import *
+from check import check_solvability as mace4_check
 
 BG = "#f4f6f8"
 CARD = "#ffffff"
@@ -174,20 +175,7 @@ class MUPuzzleGUI:
             messagebox.showinfo("Undo", "Nothing to undo!")
 
     def check_solvability(self):
-        if number_of_I_mod3(self.current) != 0:
-            messagebox.showinfo(
-                "Solvability",
-                "This state CANNOT lead to MU.\n\n"
-                "Reason:\n"
-                "The number of I's modulo 3 is invariant."
-            )
-        else:
-            messagebox.showinfo(
-                "Solvability",
-                "This state MAY lead to MU.\n"
-                "(I mod 3 = 0)"
-            )
-
+        mace4_check()
 
     def make_button(self, parent, text, command):
         return tk.Button(
