@@ -155,6 +155,7 @@ Model finding
 Proof by invariant
 
 Screenshots: 
+
 <img width="787" height="595" alt="Screenshot 2026-02-28 215057" src="https://github.com/user-attachments/assets/6e9ff364-9494-4c3d-aff5-957b583dc798" />
 <img width="792" height="590" alt="Screenshot 2026-02-28 215140" src="https://github.com/user-attachments/assets/dd33e500-7f10-40c9-ab20-b39cdcacd975" />
 <img width="787" height="590" alt="Screenshot 2026-02-28 215222" src="https://github.com/user-attachments/assets/d0db00f6-4a3d-43ca-9644-472cbe04558a" />
