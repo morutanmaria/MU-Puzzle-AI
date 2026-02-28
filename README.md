@@ -1,4 +1,4 @@
-Project Overview
+## Project Overview
 
 This project implements an interactive version of the MU puzzle introduced by Douglas Hofstadter in Gödel, Escher, Bach.
 
@@ -14,7 +14,7 @@ The central question is:
 
 Can we derive MU using only the four formal rules?
 
-This project provides:
+## This project provides:
 
 A complete implementation of the MU system
 
@@ -26,7 +26,7 @@ Invariant tracking (mod-3 property)
 
 Optional integration with Mace4 for automated model finding
 
-The MU System Rules
+## The MU System Rules
 
 Let x denote any string after the leading M.
 
@@ -50,7 +50,7 @@ Remove any occurrence of UU.
 
 UU → ε
 
-Project Features
+## Project Features
  Interactive GUI
 
 Click directly on highlighted substrings (III, UU) to apply transformations
@@ -69,7 +69,7 @@ If a rule applies in multiple places (e.g., MIIII has two III occurrences), the 
 
 This models a proper term rewriting system.
 
- Mathematical Invariant Tracking
+## Mathematical Invariant Tracking
 
 The system continuously displays:
 
@@ -88,7 +88,7 @@ And 1 mod 3 ≠ 0 mod 3, it follows that:
 
 MU is not derivable from MI.
 
-Mace4 Integration
+## Mace4 Integration
 
 The project can optionally integrate with
 Mace4.
@@ -108,7 +108,7 @@ Demonstrate that MU is not reachable
 
 This provides an automated formal proof of impossibility.
 
-Architecture
+## Architecture
 
 Python GUI runs on Windows
 
@@ -122,7 +122,7 @@ Output is parsed and shown in GUI
 
 This separation reflects standard formal methods workflows.
 
-How to Run
+## How to Run
 Install Python 3
 
 Ensure Python 3.10+ is installed.
@@ -130,7 +130,7 @@ Ensure Python 3.10+ is installed.
 Run the GUI
 python gui.py
 
-Theoretical Significance
+## Theoretical Significance
 
 The MU puzzle demonstrates:
 
@@ -144,7 +144,7 @@ Undecidability intuition
 
 Model-theoretic reasoning
 
-It serves as an accessible introduction to:
+## It serves as an accessible introduction to:
 
 First-order logic
 
